@@ -74,6 +74,17 @@ func calculate(result []string, a, b int) int {
 	if matchedRoman {
 		FirstNumber = arab[0]
 		SecondNumber = arab[1]
+
+		//Проверка простого или сложносоставного римского числа
+		CheckFirstNumber := arabtoRoman(arab[0])
+		CheckSecondNumber := arabtoRoman(arab[1])
+		F, _ := regexp.MatchString(CheckFirstNumber, result[0])
+		S, _ := regexp.MatchString(CheckSecondNumber, result[2])
+
+		if !F || !S {
+			panic("Ошибка, неверное написание одного из двух римских операндов")
+		}
+
 		if arab[0] <= 0 || arab[0] > 10 || arab[1] <= 0 || arab[1] > 10 {
 			panic("Ошибка, калькулятор принимает на вход числа от 1 до 10 включительно")
 		}
